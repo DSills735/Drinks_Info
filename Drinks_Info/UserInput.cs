@@ -6,7 +6,10 @@ namespace Drinks_Info
 {
     internal class UserInput
     {
-
-        //for user 
+        DrinksService drinksService = new();
+        internal void GetCategoriesInput()
+        {
+            drinksService.GetCategories();
+        }
     }
 }

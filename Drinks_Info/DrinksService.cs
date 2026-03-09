@@ -1,5 +1,6 @@
-﻿using RestSharp;
-using System.Net.Http.Headers;
+﻿using Newtonsoft.Json;
+using RestSharp;
+using Drinks_Info.Models;
 
 namespace Drinks_Info
 {
@@ -11,7 +12,15 @@ namespace Drinks_Info
             var request = new RestRequest("list.php?c=list");
             var response = client.ExecuteAsync(request);
 
+            if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                string rawResponse = response.Result.Content!;
+                var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
 
+                List<Category> returnedList = serialize.CategoriesList!;
+
+                //TODO call the table builder here. 
+            }
         }
     }
 }
