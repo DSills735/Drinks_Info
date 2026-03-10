@@ -14,7 +14,7 @@ None yet.
 
 This is the first time I have coded something that communicates with an external API. 
 
-## Project Requirements -- If there was any
+## Project Requirements
 You were hired by restaurant to create a solution for their drinks menu.
 
 - Their drinks menu is provided by an external company. All the data about the drinks is in the companies database, accessible through an API.
