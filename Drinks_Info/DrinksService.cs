@@ -15,7 +15,8 @@ namespace Drinks_Info
 
             if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                string rawResponse = response.Result.Content!;
+                string rawResponse = response.Result.Content;
+
                 var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
 
                 List<Category> returnedList = serialize.CategoriesList!;

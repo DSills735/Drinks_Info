@@ -15,7 +15,7 @@ namespace Drinks_Info
 
                 Console.WriteLine("\n\n");
 
-                //TODO why isnt the table printing 
+                //TODO why isnt the table printing -- Its something with the method not getting called
                 var table = new Table()
                     .RoundedBorder()
                     .AddColumn(tableName);
