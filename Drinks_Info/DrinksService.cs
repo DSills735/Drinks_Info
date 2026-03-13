@@ -91,6 +91,7 @@ namespace Drinks_Info
 
                 if (rawResponse != null)
                 {
+                    //TODO handle mis-input error
                     var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
 
                     if (serialize != null)

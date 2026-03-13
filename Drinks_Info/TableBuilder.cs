@@ -44,6 +44,8 @@ namespace Drinks_Info
         }
         public static void ShowDetailsTable(List<object> tableData, string tableName)
         {
+            //TODO find a way to show this in only spefified language
+
             Console.Clear();
 
             var table = new Table()
