@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using Drinks_Info.Models;
-
 namespace Drinks_Info
 {
     internal class DrinksService
