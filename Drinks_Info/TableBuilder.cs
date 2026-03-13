@@ -49,7 +49,9 @@ namespace Drinks_Info
             Console.Clear();
 
             var table = new Table()
-                .RoundedBorder()
+         
+                .Border(TableBorder.Rounded)
+                .ShowRowSeparators()
                 .Title($"[bold yellow]{tableName}[/]")
                 .AddColumn("[grey]Property[/]")
                 .AddColumn("[white]Description[/]");
