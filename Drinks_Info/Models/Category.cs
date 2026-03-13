@@ -5,7 +5,7 @@ namespace Drinks_Info.Models
     public class Category
     {
         
-        public string StrCategory { get; set; } 
+        public required string StrCategory { get; set; } 
 
         public override string ToString()
         {
@@ -16,6 +16,6 @@ namespace Drinks_Info.Models
     public class Categories
     {
         [JsonProperty("drinks")]
-        public List<Category> CategoriesList { get; set; }
+        public required List<Category> CategoriesList { get; set; }
     }
 }

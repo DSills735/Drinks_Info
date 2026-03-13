@@ -13,7 +13,6 @@ namespace Drinks_Info
             {
                 tableName = "";
             }
-            Console.WriteLine("\n\n");
 
             var table = new Table()
                 .RoundedBorder()
