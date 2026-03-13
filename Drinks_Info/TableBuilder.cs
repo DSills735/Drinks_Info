@@ -12,20 +12,19 @@ namespace Drinks_Info
             if (tableName == null)
             {
                 tableName = "";
-
-                Console.WriteLine("\n\n");
-
-                //TODO why isnt the table printing -- Its something with the method not getting called
-                var table = new Table()
-                    .RoundedBorder()
-                    .AddColumn(tableName);
-                foreach (var item in tableData)
-                {
-                    table.AddRow(item.ToString()!);
-                }
-                AnsiConsole.Write(table);
-
             }
+            Console.WriteLine("\n\n");
+            // TODO not printing the actual item, but printing the namespace... not sure why. It shows DrinksInfo.Models.Category
+            var table = new Table()
+                .RoundedBorder()
+                .AddColumn(tableName);
+            foreach (var item in tableData)
+            {
+                table.AddRow(item.ToString());
+            }
+            AnsiConsole.Write(table);
+
         }
     }
 }
+

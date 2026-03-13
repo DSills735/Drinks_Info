@@ -8,8 +8,8 @@ namespace Drinks_Info
     {   
         public void GetCategories()
         {
-            //TODO is this calling correct - return code is ok, not sure why the table isnt generating. 
-            var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1");
+            
+            var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
             var request = new RestRequest("list.php?c=list");
             var response = client.ExecuteAsync(request);
 

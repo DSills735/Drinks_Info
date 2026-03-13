@@ -4,7 +4,13 @@ namespace Drinks_Info.Models
 {
     public class Category
     {
+        
         public string StrCategory { get; set; }
+
+        public override string ToString()
+        {
+            return StrCategory;
+        }
     }
 
     public class Categories
