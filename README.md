@@ -12,7 +12,9 @@ None yet.
 
 ## Lessons Learned
 
-This is the first time I have coded something that communicates with an external API. I am spending more time thinking over nullable reference types, and nullable warnings. Previously I always was just able to use a null forgiving operator safely, but in this project I must put more time and consideration into it. 
+- This is the first time I have coded something that communicates with an external API. 
+
+- I am spending more time thinking over nullable reference types, and nullable warnings. Previously I always was just able to use a null forgiving operator safely, but in this project I must put more time and consideration into it. 
 
 ## Project Requirements
 
