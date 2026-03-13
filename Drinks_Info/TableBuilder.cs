@@ -14,7 +14,7 @@ namespace Drinks_Info
                 tableName = "";
             }
             Console.WriteLine("\n\n");
-            // TODO not printing the actual item, but printing the namespace... not sure why. It shows DrinksInfo.Models.Category
+
             var table = new Table()
                 .RoundedBorder()
                 .AddColumn(tableName);
