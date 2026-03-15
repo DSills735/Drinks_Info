@@ -9,6 +9,7 @@ namespace Drinks_Info
 {
     internal class DrinksService
     {
+        
         public void GetCategories()
         {
 
@@ -31,6 +32,7 @@ namespace Drinks_Info
                             List<Category> returnedList = serialize.CategoriesList!;
                             TableBuilder.ShowTable(returnedList, "Categories");
                         }
+                        
                     }
                 }
             }
@@ -41,6 +43,7 @@ namespace Drinks_Info
             catch (Exception)
             {
                 Console.WriteLine("Something unexpected has happened. Please try again.");
+                
             }
         }
 
@@ -100,7 +103,8 @@ namespace Drinks_Info
             }
             catch (Exception)
             {
-                Console.WriteLine("Something unexpected has happened. Please try again.");
+                Console.WriteLine("There was an unexpected input. Please try again.");
+                
             }
         }
 
