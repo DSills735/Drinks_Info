@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#nullable disable
 using Newtonsoft.Json;
-#nullable disable
+
 namespace drinks_info.Models
 {
     internal class DrinkDetailObject

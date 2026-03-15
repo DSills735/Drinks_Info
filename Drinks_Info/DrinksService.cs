@@ -14,68 +14,93 @@ namespace Drinks_Info
 
             var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
             var request = new RestRequest($"list.php?c=list");
-            var response = client.ExecuteAsync(request);
-
-            if (response.Result.StatusCode == System.Net.HttpStatusCode.OK && response.Result.Content != null)
+            try
             {
-                string rawResponse = response.Result.Content;
+                var response = client.ExecuteAsync(request);
 
-                if (rawResponse != null)
+                if (response.Result.StatusCode == System.Net.HttpStatusCode.OK && response.Result.Content != null)
                 {
-                    var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
+                    string rawResponse = response.Result.Content;
 
-                    if (serialize != null)
+                    if (rawResponse != null)
                     {
-                        List<Category> returnedList = serialize.CategoriesList!;
-                        TableBuilder.ShowTable(returnedList, "Categories");
+                        var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
+
+                        if (serialize != null)
+                        {
+                            List<Category> returnedList = serialize.CategoriesList!;
+                            TableBuilder.ShowTable(returnedList, "Categories");
+                        }
                     }
                 }
             }
-
+            catch (HttpRequestException)
+            {
+                Console.WriteLine("The API is unreachable for some reason. Please try again later. Sorry.");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Something unexpected has happened. Please try again.");
+            }
         }
 
         internal void GetDrink(string drink)
         {
             var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
             var request = new RestRequest($"lookup.php?i={drink}");
-            var response = client.ExecuteAsync(request);
 
-            if (response.Result.StatusCode == System.Net.HttpStatusCode.OK && response.Result.Content != null)
+            try
             {
-                string rawResponse = response.Result.Content;
+                var response = client.ExecuteAsync(request);
 
-                if (rawResponse != null)
+
+
+                if (response.Result.StatusCode == System.Net.HttpStatusCode.OK && response.Result.Content != null)
                 {
-                    var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
+                    string rawResponse = response.Result.Content;
 
-                    if (serialize != null)
+                    if (rawResponse != null)
                     {
-                        List<DrinkDetail> returnedList = serialize.DrinkDetailList!;
-                        DrinkDetail drinkDetail = returnedList[0];
+                        var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
 
-                        List<object> prepList = new();
-
-                        string formattedName = "";
-
-                       foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
+                        if (serialize != null)
                         {
-                            if (prop.Name.Contains("str"))
-                            {
-                                formattedName = prop.Name.Substring(3);
-                            }
+                            List<DrinkDetail> returnedList = serialize.DrinkDetailList!;
+                            DrinkDetail drinkDetail = returnedList[0];
 
-                            if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString()))
+                            List<object> prepList = new();
+
+                            string formattedName = "";
+
+                            foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
                             {
-                                prepList.Add(new
+                                if (prop.Name.Contains("str"))
                                 {
-                                    Key = formattedName,
-                                    Value = prop.GetValue(drinkDetail)
-                                });
+                                    formattedName = prop.Name.Substring(3);
+                                }
+
+                                if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString()))
+                                {
+                                    prepList.Add(new
+                                    {
+                                        Key = formattedName,
+                                        Value = prop.GetValue(drinkDetail)
+                                    });
+                                }
                             }
+                            TableBuilder.ShowDetailsTable(prepList, drinkDetail.strDrink);
                         }
-                        TableBuilder.ShowDetailsTable(prepList, drinkDetail.strDrink);
                     }
                 }
+
+            }
+            catch (HttpRequestException)
+            {
+                Console.WriteLine("The API is unreachable for some reason. Please try again later. Sorry.");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Something unexpected has happened. Please try again.");
             }
         }
 
@@ -83,27 +108,41 @@ namespace Drinks_Info
         {
             var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
             var request = new RestRequest($"filter.php?c={HttpUtility.UrlEncode(category)}");
-            var response = client.ExecuteAsync(request);
 
-            if (response.Result.StatusCode == System.Net.HttpStatusCode.OK && response.Result.Content != null)
+            try
             {
-                string rawResponse = response.Result.Content;
 
-                if (rawResponse != null)
+
+                var response = client.ExecuteAsync(request);
+
+                if (response.Result.StatusCode == System.Net.HttpStatusCode.OK && response.Result.Content != null)
                 {
-                    //TODO handle mis-input error
-                    var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
+                    string rawResponse = response.Result.Content;
 
-                    if (serialize != null)
+                    if (rawResponse != null)
                     {
-                        List<Drink> returnedList = serialize.DrinksList!;
-                        TableBuilder.ShowTable(returnedList, "Drinks");
+                        //TODO handle mis-input error
+                        var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
+
+                        if (serialize != null)
+                        {
+                            List<Drink> returnedList = serialize.DrinksList!;
+                            TableBuilder.ShowTable(returnedList, "Drinks");
+                        }
                     }
                 }
+
+            }
+            catch (HttpRequestException)
+            {
+                Console.WriteLine("The API is unreachable for some reason. Please try again later. Sorry.");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Something unexpected has happened. Please try again.");
             }
 
-
         }
-        
+
     }
 }
