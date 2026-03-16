@@ -57,8 +57,6 @@ namespace Drinks_Info
             {
                 var response = client.ExecuteAsync(request);
 
-
-
                 if (response.Result.StatusCode == System.Net.HttpStatusCode.OK && response.Result.Content != null)
                 {
                     string rawResponse = response.Result.Content;
@@ -93,7 +91,7 @@ namespace Drinks_Info
                             List<object> prepList = new();
 
                             string formattedName = "";
-                            
+
                             foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
                             {
                                 if (prop.Name.Contains("str"))
@@ -185,6 +183,5 @@ namespace Drinks_Info
 
 
         }
-
     }
 }
