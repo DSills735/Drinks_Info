@@ -1,20 +1,20 @@
 # Drinks Info
 This app is a user interface that interacts with the public external cocktails database API. More info to come as I create more. 
 
-**Tech used:** C#, RestSharp 
+**Tech used:** C#, RestSharp.
 
 
 
 ## Optimizations
 
-None yet.
-
+ - I added validation in 2 different ways for user input, experimenting with different ways. 
 
 ## Lessons Learned
 
 - This is the first time I have coded something that communicates with an external API. 
 
-- I am spending more time thinking over nullable reference types, and nullable warnings. Previously I always was just able to use a null forgiving operator safely, but in this project I must put more time and consideration into it. 
+- I am spending more time thinking over nullable reference types, and nullable warnings. Previously I always was just able to use a null forgiving operator safely, but in this project I must put more time and consideration into it.
+- I spent more time and energy using the proper naming and access modifiers. I put more thought into creating instances of classes, rather than only use static classes. 
 
 ## Project Requirements
 
