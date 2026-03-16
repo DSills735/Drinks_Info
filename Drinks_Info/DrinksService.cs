@@ -1,15 +1,16 @@
-﻿using Newtonsoft.Json;
-using RestSharp;
+﻿using drinks_info.Models;
 using Drinks_Info.Models;
-using System.Web;
+using Newtonsoft.Json;
+using RestSharp;
+using Spectre.Console;
 using System.Reflection;
-using drinks_info.Models;
+using System.Web;
 
 namespace Drinks_Info
 {
     internal class DrinksService
     {
-        
+
         public void GetCategories()
         {
 
@@ -32,7 +33,7 @@ namespace Drinks_Info
                             List<Category> returnedList = serialize.CategoriesList!;
                             TableBuilder.ShowTable(returnedList, "Categories");
                         }
-                        
+
                     }
                 }
             }
@@ -43,11 +44,11 @@ namespace Drinks_Info
             catch (Exception)
             {
                 Console.WriteLine("Something unexpected has happened. Please try again.");
-                
+
             }
         }
 
-        internal void GetDrink(string drink)
+        internal void GetDrink(string drink, string category)
         {
             var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
             var request = new RestRequest($"lookup.php?i={drink}");
@@ -69,17 +70,36 @@ namespace Drinks_Info
                         if (serialize != null)
                         {
                             List<DrinkDetail> returnedList = serialize.DrinkDetailList!;
-                            DrinkDetail drinkDetail = returnedList[0];
+
+                            if (returnedList == null)
+                            {
+                                Console.WriteLine("Sorry, that drink doesn't exist. Please try again.");
+                                AnsiConsole.Status()
+                         .Start("Regenerating options...", ctx =>
+                         {
+                             ctx.Spinner(Spinner.Known.Aesthetic);
+                             Thread.Sleep(3000);
+
+
+                         });
+                                UserInput userInput = new UserInput();
+                                userInput.GetDrinksInput(category);
+                            }
+
+                            DrinkDetail drinkDetail = returnedList![0];
+
+
 
                             List<object> prepList = new();
 
                             string formattedName = "";
-
+                            int count = 0;
                             foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
                             {
                                 if (prop.Name.Contains("str"))
                                 {
                                     formattedName = prop.Name.Substring(3);
+
                                 }
 
                                 if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString()))
@@ -104,7 +124,7 @@ namespace Drinks_Info
             catch (Exception)
             {
                 Console.WriteLine("There was an unexpected input. Please try again.");
-                
+
             }
         }
 

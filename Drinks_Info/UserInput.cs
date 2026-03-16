@@ -9,7 +9,7 @@ namespace Drinks_Info
         DrinksService drinksService = new();
         internal void GetCategoriesInput()
         {
-            //todo figure out validation here
+            //todo figure out validation here 
             drinksService.GetCategories();
 
             Console.WriteLine("Please enter what category of drinks you would like to view.");
@@ -26,19 +26,24 @@ namespace Drinks_Info
             }
             
 
-        private void GetDrinksInput(string cat)
+        internal void GetDrinksInput(string cat)
         {
             drinksService.GetDrinksByCategory(cat);
             AnsiConsole.MarkupLine("Please choose a drink by ID, or return to the menu by typing 0.");
 
             string drink = Console.ReadLine() ?? string.Empty;
 
+            if (drink == "0")
+            {
+                GetCategoriesInput();
+            }
+
             while (!Validation.isIdValid(drink))
             {
                 AnsiConsole.MarkupLine("[maroon] The input was invalid[/]");
                 drink = Console.ReadLine() ?? string.Empty;
             }
-            drinksService.GetDrink(drink);
+            drinksService.GetDrink(drink, cat);
 
         }
     }
