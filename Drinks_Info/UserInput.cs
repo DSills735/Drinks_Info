@@ -8,8 +8,7 @@ namespace Drinks_Info
     {
         DrinksService drinksService = new();
         internal void GetCategoriesInput()
-        {
-            //todo figure out validation here 
+        { 
             drinksService.GetCategories();
 
             Console.WriteLine("Please enter what category of drinks you would like to view.");

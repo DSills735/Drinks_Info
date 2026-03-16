@@ -143,16 +143,20 @@ namespace Drinks_Info
                 {
                     string rawResponse = response.Result.Content;
 
+
                     if (rawResponse != null)
                     {
-                        //TODO handle mis-input error
+
                         var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
+
+
 
                         if (serialize != null)
                         {
                             List<Drink> returnedList = serialize.DrinksList!;
                             TableBuilder.ShowTable(returnedList, "Drinks");
                         }
+
                     }
                 }
 
@@ -161,10 +165,22 @@ namespace Drinks_Info
             {
                 Console.WriteLine("The API is unreachable for some reason. Please try again later. Sorry.");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("Something unexpected has happened. Please try again.");
+                Console.WriteLine("Sorry, that category doesn't exist, or another error occured. Please try again.");
+                AnsiConsole.Status()
+                 .Start("Regenerating options...", ctx =>
+                 {
+                     ctx.Spinner(Spinner.Known.Aesthetic);
+                     Thread.Sleep(3000);
+
+
+                 });
+                UserInput userInput = new UserInput();
+
+                userInput.GetCategoriesInput();
             }
+
 
         }
 
