@@ -93,7 +93,7 @@ namespace Drinks_Info
                             List<object> prepList = new();
 
                             string formattedName = "";
-                            int count = 0;
+                            
                             foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
                             {
                                 if (prop.Name.Contains("str"))
@@ -168,6 +168,8 @@ namespace Drinks_Info
             catch (Exception e)
             {
                 Console.WriteLine("Sorry, that category doesn't exist, or another error occured. Please try again.");
+                Console.WriteLine($"Error details: {e.Message}");
+
                 AnsiConsole.Status()
                  .Start("Regenerating options...", ctx =>
                  {
