@@ -26,12 +26,7 @@ This app is a user interface that interacts with the public external cocktails d
 
 - You should handle errors so that if the API is down, the application doesn't crash.
 
-**Suggested Challenges:**
-- Add a 'Favorite Drinks' Functionality
-  
-- Find a way to show the images of the drinks.
-  
-- Add a view count to the images.
-  
-- Refactor and use the .NET HTTP client.
+## Goals
+
+I would like to come back to this project and make the user interface more pleasant, and maybe add ascii art images of the drink. I intiially considered doing this when I was wokring on the project, but I got too excited to start working with entity framework, and to dive deeper into full stack C# development, so I moved ahead. 
   
